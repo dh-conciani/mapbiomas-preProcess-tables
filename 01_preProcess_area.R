@@ -51,8 +51,17 @@ ggplot(data=recipe, mapping=aes(x= as.numeric(year), y= area, col=collection)) +
   facet_grid(biome~level_0, scales='free') +
   theme_bw()
 
+## melt table again (concatenate Levels)
+r <- melt(recipe, id.vars=c('biome', 'state', 'collection', 'year', 'area'))
+
+## standardize to Mha
+names(r)[names(r) == 'variable'] <- 'level'
+
+## convert to Mha
+r$area <- r$area/1000000
+
 ## export 
-write.table(x= recipe,
+write.table(x= r,
             file= './table/area_biomes_per_state_from_5_to_7.csv', 
             fileEncoding='UTF-8',
             row.names= FALSE,
