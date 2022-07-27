@@ -56,17 +56,18 @@ r <- melt(recipe, id.vars=c('biome', 'state', 'collection', 'year', 'area'))
 
 ## standardize to Mha
 names(r)[names(r) == 'variable'] <- 'level'
+names(r)[names(r) == 'value'] <- 'class'
 
 ## convert to Mha
 r$area <- r$area/1000000
 
 ## export 
 write.table(x= r,
-            file= './table/area_biomes_per_state_from_5_to_7.csv', 
+            file= './table/area_biomes_per_state_from_5_to_7_v8.csv', 
             fileEncoding='UTF-8',
             row.names= FALSE,
             sep='\t',
-            dec='.',
+            dec=',',
             col.names= TRUE)
 
 #write.xlsx(x= recipe,
