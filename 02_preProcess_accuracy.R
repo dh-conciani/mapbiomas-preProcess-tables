@@ -59,3 +59,33 @@ readData <- function (path) {
 ## import file
 data <- readData(path= './table/')
 
+## rename collections
+data$collection <- gsub("col31", "3.1",
+                       gsub("col41", "4.1",
+                            gsub("col5", "5",
+                                 gsub("col6", "6",
+                                      gsub("col7", "7",
+                                          data$collection)))))
+
+## rename level
+data$level <- gsub("nv1", "Level-1",
+                   gsub("nv3", "Level-3",
+                        data$level))
+
+## rename level
+data$biome <- gsub("amazonia", "Amazônia",
+                   gsub("caatinga", "Caatinga",
+                        gsub("cerrado", "Cerrado",
+                             gsub("mata", "Mata Atlântica",
+                                  gsub("pampa", "Pampa",
+                                       gsub("pantanal", "Pantanal",
+                                            data$biome))))))
+
+## write table
+write.table(x= data,
+            file= './accuracy_biomes_collection_31_to_70.csv', 
+            fileEncoding='UTF-8',
+            row.names= FALSE,
+            sep='\t',
+            dec=',',
+            col.names= TRUE)
