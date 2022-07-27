@@ -81,6 +81,11 @@ data$biome <- gsub("amazonia", "Amazônia",
                                        gsub("pantanal", "Pantanal",
                                             data$biome))))))
 
+## format table
+data$accuracy <- as.numeric(data$accuracy)
+data$area_discordance <- as.numeric(data$area_discordance)
+data$allocation_discordance <- as.numeric(data$allocation_discordance)
+
 ## write table
 write.table(x= data,
             file= './accuracy_biomes_collection_31_to_70.csv', 
